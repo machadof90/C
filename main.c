@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+//funcooes
+int contarCaracteres(const char *str) { 
+        int contador = 0;
+        while (str[contador] != '\0') {
+            contador++;
+        } 
+
+    return contador;
+}
 int opcao, posicao = 0;
 
 struct segredo {
@@ -14,6 +23,7 @@ void lista();
 void cadastrar();
 void jogar();
 void menu();
+void banner();
 
 int main()
 {
@@ -82,7 +92,11 @@ void cadastrar()
             printf("Palavra cadastrada com sucesso\n");
             Sleep(2000);
         main();
-        }   
+        }  
+    case 2: 
+        system("cls");  
+        menu();
+        break; 
 }
 }
 
@@ -99,5 +113,31 @@ void lista()
 }
 void jogar()
 {
-	printf("3\n");	
+	opcao = 0;
+    char letra[1];
+    banner();
+    printf("qual o numero da palavra secreta?\n");
+    scanf("%d", &opcao);
+    while (opcao > posicao){
+        printf("enigma nao existe, escolha outro numero:\n");
+        scanf("%d", &opcao);
+    }
+    printf("%s", enigma[opcao].palavra);
+    int letras = contarCaracteres(enigma[opcao].palavra);
+    printf("%d",letras);
+    for(int i = 0; i < letras; i++){
+        printf("_____\t");
+    }
+    printf("Digite a letra:\t");
+    scanf("%d", letra);
+    Sleep(5000);
+
+
+    printf("");
+    
+}
+
+void banner()
+{
+     printf("HORA DA DIVERSÃO!!!!!\n\n");
 }
