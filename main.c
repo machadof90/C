@@ -50,6 +50,29 @@ void cadastrar()
     scanf("%s", entrada_palavra); 
     printf("Me fale uma dica:\n"); 
     scanf(" %[^\n]", entrada_dica); // Lê até a nova linha//
+    printf("Confirma a palavra %s com a dica %s?\n", entrada_palavra, entrada_dica);
+    printf("[1]Sim\n");
+    printf("[2]Nao\n");
+    scanf("%d", &opcao);
+    while(opcao > 2 || opcao < 1){
+        printf("Opcao invalida, digite novamente:\n");
+        scanf("%d", &opcao);
+    }
+    switch (opcao){
+    case 1:
+     do {
+        if(entrada_palavra == enigma[posicao].palavra){
+            printf("Palavra ja cadastrada\n");
+            break;
+        }
+        posicao++;
+    }while (i < posicao);
+     enigma[posicao].palavra = entrada_palavra;
+     enigma[posicao].dica = entrada_dica;
+     enigma[posicao].item = posicao;
+     posicao++;
+     break;
+    
 }
 void lista()
 {
