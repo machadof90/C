@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 int opcao, posicao = 0;
 
 struct segredo {
@@ -44,6 +45,8 @@ void menu(){
 void cadastrar()
 {
 	opcao = 0;
+    int i = 0, encontrado = 0;
+    int indice = posicao;
 	char entrada_palavra[50]; 
     char entrada_dica[100]; 
     printf("Digite a palavra:\n"); 
@@ -61,18 +64,29 @@ void cadastrar()
     switch (opcao){
     case 1:
      do {
-        if(entrada_palavra == enigma[posicao].palavra){
-            printf("Palavra ja cadastrada\n");
-            break;
+        if(entrada_palavra == enigma[i].palavra){
+            int encontrado = 1;
+            break        }
+        indice++;
+    }while ( i < posicao);
+    if (encontrado) {
+        printf("cls");
+        printf("Palavra ja cadastrada\n");
+        Sleep(2000);   
+        main(); 
+        }else{
+            strcpy(enigma[posicao].palavra, entrada_palavra);
+            strcpy(enigma[posicao].dica, entrada_dica);
+            enigma[posicao].item = posicao;
+            posicao++;
+            system("cls");
+            printf("Palavra cadastrada com sucesso\n");
+            Sleep(2000);
+        main();
         }
-        posicao++;
-    }while (i < posicao);
-     enigma[posicao].palavra = entrada_palavra;
-     enigma[posicao].dica = entrada_dica;
-     enigma[posicao].item = posicao;
-     posicao++;
-     break;
+        break;
     
+}
 }
 void lista()
 {
