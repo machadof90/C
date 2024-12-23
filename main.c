@@ -8,7 +8,7 @@ struct segredo {
 	char dica[100];
 	int item;
 };
-struct segredo enigma[];
+struct segredo enigma[100];
 
 void lista();
 void cadastrar();
@@ -54,7 +54,7 @@ void cadastrar()
     printf("Me fale uma dica:\n"); 
     scanf(" %[^\n]", entrada_dica); // Lê até a nova linha//
     printf("Confirma a palavra %s com a dica %s?\n", entrada_palavra, entrada_dica);
-    printf("[1]Sim\n");
+    printf("[1]Sim\t");
     printf("[2]Nao\n");
     scanf("%d", &opcao);
     while(opcao > 2 || opcao < 1){
@@ -65,15 +65,14 @@ void cadastrar()
     case 1:
      do {
         if(entrada_palavra == enigma[i].palavra){
-            int encontrado = 1;
-            break        }
+            encontrado = 1;
+        }
         indice++;
-    }while ( i < posicao);
-    if (encontrado) {
-        printf("cls");
-        printf("Palavra ja cadastrada\n");
-        Sleep(2000);   
-        main(); 
+    }while ( i < indice);
+    if (encontrado == 1) { 
+        printf("Palavra ja cadastrada\n"); 
+        Sleep(2000); 
+        menu(); 
         }else{
             strcpy(enigma[posicao].palavra, entrada_palavra);
             strcpy(enigma[posicao].dica, entrada_dica);
@@ -83,14 +82,20 @@ void cadastrar()
             printf("Palavra cadastrada com sucesso\n");
             Sleep(2000);
         main();
-        }
-        break;
-    
+        }   
 }
 }
+
 void lista()
 {
-	printf("2\n");	
+	printf("Item\tPalavra\t\tDica\t\t\t\t\n");
+    for(int i = 0; i < posicao; i++){
+        printf("%d\t%s\t\t%s\n", enigma[i].item, enigma[i].palavra, enigma[i].dica);
+    }
+    printf("aperter qualquer tecla para voltar ao menu\n");
+    getch();
+    system("cls");
+    main();	
 }
 void jogar()
 {
