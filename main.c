@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <windows.h>
 //funcooes
-int contarCaracteres(const char *str) { 
+int contarCaracteres(const char *str) {
         int contador = 0;
         while (str[contador] != '\0') {
             contador++;
@@ -10,6 +10,18 @@ int contarCaracteres(const char *str) {
 
     return contador;
 }
+int posicaoletra(const char *palavra, char letra){
+    int i = 0;
+    while (palavra[i] != '\0'){
+        if(palavra[i] == letra){
+            return i;
+        }
+        i++;
+    }
+    return -1;    
+}
+
+//variaveis
 int opcao, posicao = 0;
 
 struct segredo {
@@ -19,6 +31,7 @@ struct segredo {
 };
 struct segredo enigma[100];
 
+//void
 void lista();
 void cadastrar();
 void jogar();
@@ -114,6 +127,7 @@ void lista()
 void jogar()
 {
 	opcao = 0;
+    int acerto = 0;
     char letra[1];
     banner();
     printf("qual o numero da palavra secreta?\n");
@@ -122,19 +136,34 @@ void jogar()
         printf("enigma nao existe, escolha outro numero:\n");
         scanf("%d", &opcao);
     }
-    printf("%s", enigma[opcao].palavra);
     int letras = contarCaracteres(enigma[opcao].palavra);
-    printf("%d",letras);
-    for(int i = 0; i < letras; i++){
-        printf("_____\t");
-    }
-    printf("Digite a letra:\t");
-    scanf("%d", letra);
-    Sleep(5000);
-
-
-    printf("");
     
+    char segredo[50];
+    char vazio = ("_____\t");
+    for(int i = 0; i < letras; i++){
+        strcpy(segredo[i],vazio);
+    }
+    printf("A PALAVRA TEM %d LETRAS\n",letras);
+    for(int i = 0; i < letras; i++){
+        printf("%c", segredo[i]);
+    } 
+    printf("\nDigite a letra:\t");
+    scanf("%d", &letra);    
+    int indice = posicaoletra(enigma[posicao].palavra, letra);
+    while (acerto < letras) {
+        if (indice >= 0){
+            strcpy(segredo[indice], letra);
+            system("cls");
+            for(int i = 0; i < letras; i++){
+            printf("%c", segredo[i]);
+            printf("\noutra letra:\n");
+            acerto++;
+            }
+        }else{
+            printf("\nerrou!!!, outra letra\n");
+            }
+        scanf("%d", &letra); 
+    }
 }
 
 void banner()
