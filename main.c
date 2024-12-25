@@ -36,7 +36,7 @@ void lista();
 void cadastrar();
 void jogar();
 void menu();
-void banner();
+void banner();// banner do jogo
 
 int main()
 {
@@ -129,25 +129,29 @@ void jogar()
 	opcao = 0;
     int acerto = 0;
     char letra[1];
+    char segredo[50];
+    char vazio[10] = "<<>>";
+    system("cls");
     banner();
     printf("qual o numero da palavra secreta?\n");
     scanf("%d", &opcao);
+    printf("%d,%d", opcao, posicao);
     while (opcao > posicao){
         printf("enigma nao existe, escolha outro numero:\n");
         scanf("%d", &opcao);
-    }
+    }  
     int letras = contarCaracteres(enigma[opcao].palavra);
-    
-    char segredo[50];
-    char vazio = ("_____\t");
+    if (opcao <= posicao){
     for(int i = 0; i < letras; i++){
         strcpy(segredo[i],vazio);
+        printf("%s   ,", vazio);
+    }
     }
     printf("A PALAVRA TEM %d LETRAS\n",letras);
     for(int i = 0; i < letras; i++){
         printf("%c", segredo[i]);
-    } 
-    printf("\nDigite a letra:\t");
+    }
+    printf("Digite a letra:\t");
     scanf("%d", &letra);    
     int indice = posicaoletra(enigma[posicao].palavra, letra);
     while (acerto < letras) {
@@ -156,7 +160,7 @@ void jogar()
             system("cls");
             for(int i = 0; i < letras; i++){
             printf("%c", segredo[i]);
-            printf("\noutra letra:\n");
+            printf("outra letra:\n");
             acerto++;
             }
         }else{
