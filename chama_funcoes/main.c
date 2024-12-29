@@ -1,20 +1,28 @@
 // main.c
 #include <stdio.h>
-#include "funcao.h"
+#include "funcao/soma.h"
+#include "funcao/subtracao.h"
+
+
+int opcao;
 
 int main() {
-    int num1, num2;
+    printf("BEM VINDO A CALCULADOR:\n\n");
+    printf("escolha a operação:\n");
+    printf("[1]  +      [2]  -\n");
+    printf("[3]  *      [4]  /\n");
+    scanf("%d",&opcao);
 
-    // Solicita ao usuário dois números
-    printf("Digite o primeiro número: ");
-    scanf("%d", &num1);
 
-    printf("Digite o segundo número: ");
-    scanf("%d", &num2);
+    switch (opcao)
+    {
+    case 1: soma();
+        break;
+    
+    case 2: subtracao();
+        break;
+    default: printf("Opção inválida\n");
+    }
 
-    // Chama a função de soma e exibe o resultado
-    int resultado = soma(num1, num2);
-    printf("A soma de %d e %d é: %d\n", num1, num2, resultado);
 
-    return 0;
 }
