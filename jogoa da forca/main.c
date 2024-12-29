@@ -22,7 +22,7 @@ int posicaoletra(const char *palavra, char letra){
 }
 
 //variaveis
-int opcao, posicao = 0;
+int opcao, posicao = 1;
 
 struct segredo {
 	char palavra[50];
@@ -35,6 +35,7 @@ struct segredo enigma[100];
 void lista();
 void cadastrar();
 void jogar();
+void jogo();
 void menu();
 void banner();// banner do jogo
 
@@ -85,7 +86,7 @@ void cadastrar()
         scanf("%d", &opcao);
     }
     switch (opcao){
-    case 1:
+    case 1: 
      do {
         if(entrada_palavra == enigma[i].palavra){
             encontrado = 1;
@@ -116,7 +117,7 @@ void cadastrar()
 void lista()
 {
 	printf("Item\tPalavra\t\tDica\t\t\t\t\n");
-    for(int i = 0; i < posicao; i++){
+    for(int i = 1; i < posicao; i++){
         printf("%d\t%s\t\t%s\n", enigma[i].item, enigma[i].palavra, enigma[i].dica);
     }
     printf("aperter qualquer tecla para voltar ao menu\n");
@@ -127,28 +128,29 @@ void lista()
 void jogar()
 {
 	opcao = 0;
-    int acerto = 0;
-    char letra[1];
-    char segredo[50];
-    char vazio[10] = "<<>>";
     system("cls");
     banner();
     printf("qual o numero da palavra secreta?\n");
     scanf("%d", &opcao);
     printf("%d,%d", opcao, posicao);
-    while (opcao > posicao){
+    while (opcao < 1 || opcao > posicao){
         printf("enigma nao existe, escolha outro numero:\n");
         scanf("%d", &opcao);
-    }  
+    } 
+   jogo(opcao);
+}
+void jogo(int opcao){
+    int acerto = 0;
+    char letra[1];
+    char segredo[50];
+    char vazio[10] = "<<>>";
     int letras = contarCaracteres(enigma[opcao].palavra);
-    if (opcao <= posicao){
-    for(int i = 0; i < letras; i++){
-        strcpy(segredo[i],vazio);
-        printf("%s   ,", vazio);
+    for(int i = 1; i < letras; i++){
+        segredo[i] = '___  ';
     }
     }
     printf("A PALAVRA TEM %d LETRAS\n",letras);
-    for(int i = 0; i < letras; i++){
+    for(int i = 1; i < letras; i++){
         printf("%c", segredo[i]);
     }
     printf("Digite a letra:\t");
@@ -158,7 +160,7 @@ void jogar()
         if (indice >= 0){
             strcpy(segredo[indice], letra);
             system("cls");
-            for(int i = 0; i < letras; i++){
+            for(int i = 1; i < letras; i++){
             printf("%c", segredo[i]);
             printf("outra letra:\n");
             acerto++;
@@ -169,7 +171,6 @@ void jogar()
         scanf("%d", &letra); 
     }
 }
-
 void banner()
 {
      printf("HORA DA DIVERSÃO!!!!!\n\n");
